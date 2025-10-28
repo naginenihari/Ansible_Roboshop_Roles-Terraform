@@ -1,0 +1,64 @@
+- name: create ec2 server and route 53 records
+  hosts: local
+  connection: local
+  vars:
+   AMI_ID: "ami-09c813fb71547fc4f"
+   SG_ID: "sg-03cb88a1f45cb9264"
+   SUBNET_ID: "subnet-082ea67177f9bd542"
+   HOSTED_ZONE: "Z05202297D7QR4S9L2JB"
+   DOMAIN_NAME: "naginenihariaws.store"
+  #  instances: 
+  #   - mongodb
+  #   - redis
+  #   - mysql
+  #   - rabbitmq
+  tasks:
+   - name: create EC2 Instance
+     amazon.aws.ec2_instance:
+       name: "{{ item }}"
+       vpc_subnet_id: "{{ SUBNET_ID }}"
+       instance_type: t2.micro
+       security_group: "{{ SG_ID }}"
+       image_id: "{{ AMI_ID }}"
+       tags:
+         Name: "{{ item }}"
+     loop: "{{ instances }}"
+     register: ec2_output
+
+  #  - name: print the ec2-output
+  #    ansible.builtin.debug:
+  #      msg: "{{ ec2_output }}"    
+
+  #  - name: print public_ip_address 
+  #    ansible.builtin.debug: 
+  #       msg: "{{item.instances[0].public_ip_address}}"
+  #    loop: "{{ ec2_output.results }}"
+
+  #  - name: print private_ipaddress 
+  #    ansible.builtin.debug: 
+  #      msg: "{{item.instances[0].private_ip_address}}"
+  #    loop: "{{ ec2_output.results }}"
+
+   - name: create the route 53 records
+     amazon.aws.route53:
+       state: present
+       zone: "{{ DOMAIN_NAME }}"
+       record: "{{ item.item }}.{{ DOMAIN_NAME }}"
+       type: A
+       ttl: 1
+       value: "{{item.instances[0].private_ip_address}}"
+       overwrite: true
+     loop: "{{ ec2_output.results }}"
+
+  # we are creating one record with public only for frontend
+   - name: create route53 record for frontend
+     amazon.aws.route53:
+      state: present
+      zone: "{{ DOMAIN_NAME }}"
+      record: "{{ DOMAIN_NAME }}" # daws86s.fun
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+      overwrite: true
+     when: item.item == "frontend"
+     loop: "{{ ec2_output.results }}"

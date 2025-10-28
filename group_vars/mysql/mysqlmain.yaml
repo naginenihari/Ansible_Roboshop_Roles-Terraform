@@ -1,0 +1,1 @@
+MYSQL_ROOT_PASSWORD: msg="{{ lookup('amazon.aws.aws_ssm', '/Satety/mysql/mysql_root-password', region='us-east-1', decrypt=true) }}"
