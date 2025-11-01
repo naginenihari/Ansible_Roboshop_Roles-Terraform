@@ -8,9 +8,8 @@
      name: mysqld
      state: restarted
      enabled: yes
-
   - name: install mysql python libraries
-  - ansible.builtin.pip:
+    ansible.builtin.pip:
       executable: pip3.9
       name: "{{ item }}"
     loop:
