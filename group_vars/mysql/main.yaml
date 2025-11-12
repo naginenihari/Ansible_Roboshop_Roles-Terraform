@@ -1,1 +1,1 @@
-MYSQL_ROOT_PASSWORD: msg="{{ lookup('amazon.aws.aws_ssm', '/safety/{{ env }}/mysql/mysql_root_password', region='us-east-1', decrypt=true) }}"
+MYSQL_ROOT_PASSWORD: "{{ lookup('amazon.aws.aws_ssm', '/safety/{{ env }}/mysql/mysql_root_password', region='us-east-1', decrypt=true) }}"
