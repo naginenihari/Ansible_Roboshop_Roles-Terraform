@@ -1,13 +1,12 @@
-MONGO_HOST: "mongodb-{{ env }}.naginenihariaws.store"
-CATALOGUE_HOST: "catalogue-backend-alb-{{ env }}.naginenihariaws.store"
-CART_HOST: "cart-backend-alb-{{ env }}.naginenihariaws.store"
-USER_HOST: "user-backend-alb-{{ env }}.naginenihariaws.store"
-MYSQL_HOST: "mysql-{{ env }}.naginenihariaws.store"
-RABBITMQ_HOST: "rabbitmq-{{ env }}.naginenihariaws.store"
-SHIPPING_HOST: "shipping-backend-alb-{{ env }}.naginenihariaws.store"
-REDIS_HOST: "redis-{{ env }}.naginenihariaws.store"
-FRONTEND_HOST: "frontend-{{ env }}.naginenihariaws.store"
-PAYMENT_HOST: "payment-backend-alb-{{ env }}.naginenihariaws.store"
+MONGO_HOST: mongodb-{{ env }}.naginenihariaws.store
+REDIS_HOST: redis-{{ env }}.naginenihariaws.store
+CATALOGUE_HOST: catalogue-backend-alb-{{ env }}.naginenihariaws.store
+CART_HOST: cart-backend-alb-{{ env }}.naginenihariaws.store
+USER_HOST: user-backend-alb-{{ env }}.naginenihariaws.store
+RABBITMQ_HOST: rabbitmq-{{ env }}.naginenihariaws.store
+MYSQL_HOST: mysql-{{ env }}.naginenihariaws.store
+SHIPPING_HOST: shipping-backend-alb-{{ env }}.naginenihariaws.store
+PAYMENT_HOST: payment-backend-alb-{{ env }}.naginenihariaws.store
 
 # MONGO_HOST: "mongodb-{{ env }}.naginenihariaws.store"
 # CATALOGUE_HOST: "catalogue-{{ env }}.naginenihariaws.store"

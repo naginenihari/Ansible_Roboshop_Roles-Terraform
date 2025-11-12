@@ -1,3 +1,2 @@
-RABBITMQ_HOST: "rabbitmq.naginenihariaws.store"
 RABBITMQ_USER: roboshop
 RABBITMQ_PASS: roboshop123
