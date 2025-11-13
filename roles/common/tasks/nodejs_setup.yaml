@@ -12,3 +12,5 @@
 - name: install dependences 
   community.general.npm:
    path: /app/
+  tags:
+   - deployment
